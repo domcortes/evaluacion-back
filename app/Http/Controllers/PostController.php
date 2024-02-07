@@ -2,36 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Posts;
+use ErrorException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $users = User::all();
-        $totalCount = $users->count();
-        $response = response()->json($users);
+        $posts = Posts::all();
+        $totalCount = $posts->count();
+        $response = response()->json($posts);
         $finalResponse = SystemController::addHeadersAPI($response, $totalCount);
         return $finalResponse;
     }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = $request->role;
-        $user->save();
-
-        return response()->json($user);
+        $post = new Posts();
+        $post->user_id = $request->userId;
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->save();
     }
 
     /**
@@ -71,8 +70,8 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::where('id', $id)->first();
-        $user->delete();
+        $post = Posts::where('id', $id)->first();
+        $post->delete();
         return response()->json([], 204);
     }
 }
