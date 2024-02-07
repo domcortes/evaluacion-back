@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Firebase\JWT\JWT;
 
 class AuthController extends Controller
 {
@@ -11,7 +13,17 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $token = auth()->user()->createToken('authToken')->accessToken;
+            $user = auth()->user();
+
+            $tokenData = [
+                'id'    => $user->id,
+                'name'  => $user->name,
+                'email' => $user->email,
+                'role'  => $user->role,
+            ];
+
+            $token = JWT::encode($tokenData, env('JWT_SECRET'), 'HS256');
+
             return response()->json(['token' => $token], 200);
         } else {
             return response()->json(['error' => 'Credenciales incorrectas'], 401);
