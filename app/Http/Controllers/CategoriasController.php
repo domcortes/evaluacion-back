@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
+use App\Models\Categories;
 use ErrorException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class CategoriasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $posts = Posts::all();
-        $totalCount = $posts->count();
-        $response = response()->json($posts);
+        $categories = Categories::all();
+        $totalCount = $categories->count();
+        $response = response()->json($categories);
         $finalResponse = SystemController::addHeadersAPI($response, $totalCount);
         return $finalResponse;
     }
@@ -26,12 +26,17 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-        $post = new Posts();
-        $post->user_id = $request->userId;
-        $post->category_id = $request->categoryId;
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
+        try {
+            $category = new Categories();
+            $category->title = $request->title;
+            $category->save();
+
+            return response()->json($category, 200);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        } catch (QueryException $th) {
+            return response()->json($th->getMessage(), 200);
+        }
     }
 
     /**
@@ -47,8 +52,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $posts = Posts::where('id', $id)->first();
-        return response()->json($posts, 200);
+        $category = Categories::where('id', $id)->first();
+        return response()->json($category, 200);
     }
 
     /**
@@ -65,16 +70,14 @@ class PostController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $post = Posts::where('id', $id)->first();
-            $post->category_id = $post->category_id;
-            $post->title = $request->title;
-            $post->body = $request->body;
-            $post->save();
+            $category = Categories::where('id', $id)->first();
+            $category->title = $request->title;
+            $category->save();
 
-            return response()->json($post, 200);
+            return response()->json($category, 200);
         } catch (ErrorException $th) {
             return response()->json($th->getMessage(), 200);
-        } catch (QueryException $th) {
+        } catch (ErrorException $th) {
             return response()->json($th->getMessage(), 200);
         }
     }
@@ -84,8 +87,8 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        $post = Posts::where('id', $id)->first();
-        $post->delete();
-        return response()->json($post, 200);
+        $category = Categories::where('id', $id)->first();
+        $category->delete();
+        return response()->json([], 204);
     }
 }
