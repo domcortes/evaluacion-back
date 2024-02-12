@@ -52,8 +52,14 @@ class CategoriasController extends Controller
      */
     public function show(string $id)
     {
-        $category = Categories::where('id', $id)->first();
-        return response()->json($category, 200);
+        try {
+            $category = Categories::where('id', $id)->first();
+            return response()->json($category, 200);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        }
     }
 
     /**
@@ -87,8 +93,14 @@ class CategoriasController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Categories::where('id', $id)->first();
-        $category->delete();
-        return response()->json([], 204);
+        try {
+            $category = Categories::where('id', $id)->first();
+            $category->delete();
+            return response()->json($category, 204);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        }
     }
 }

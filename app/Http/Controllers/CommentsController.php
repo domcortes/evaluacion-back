@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
+use App\Models\Comments;
 use ErrorException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Posts::all();
-        $totalCount = $posts->count();
-        $response = response()->json($posts);
+        $comments = Comments::where('posts_id', $request->posts_id)->get();
+        $totalCount = $comments->count();
+        $response = response()->json($comments);
         $finalResponse = SystemController::addHeadersAPI($response, $totalCount);
         return $finalResponse;
     }
@@ -27,14 +27,14 @@ class PostController extends Controller
     public function create(Request $request)
     {
         try {
-            $post = new Posts();
-            $post->user_id = $request->userId;
-            $post->category_id = $request->categoryId;
-            $post->title = $request->title;
-            $post->body = $request->body;
-            $post->save();
+            $comment = new Comments();
+            $comment->post_id = 123467;
+            $comment->comment = $request->comment;
+            $comment->visible = true;
+            $comment->reported = false;
+            $comment->save();
 
-            return response()->json($post, 200);
+            return response()->json($comment, 200);
         } catch (ErrorException $th) {
             return response()->json($th->getMessage(), 200);
         } catch (QueryException $th) {
@@ -56,11 +56,11 @@ class PostController extends Controller
     public function show(string $id)
     {
         try {
-            $posts = Posts::where('id', $id)->first();
-            return response()->json($posts, 200);
+            $comment = Comments::where('id', $id)->first();
+            return response()->json($comment, 200);
         } catch (ErrorException $th) {
             return response()->json($th->getMessage(), 200);
-        } catch (QueryException $th) {
+        } catch (ErrorException $th) {
             return response()->json($th->getMessage(), 200);
         }
     }
@@ -78,19 +78,7 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
-            $post = Posts::where('id', $id)->first();
-            $post->category_id = $post->category_id;
-            $post->title = $request->title;
-            $post->body = $request->body;
-            $post->save();
-
-            return response()->json($post, 200);
-        } catch (ErrorException $th) {
-            return response()->json($th->getMessage(), 200);
-        } catch (QueryException $th) {
-            return response()->json($th->getMessage(), 200);
-        }
+        //
     }
 
     /**
@@ -99,12 +87,12 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         try {
-            $post = Posts::where('id', $id)->first();
-            $post->delete();
-            return response()->json($post, 200);
+            $comment = Comments::where('id', $id)->first();
+            $comment->delete();
+            return response()->json($comment, 204);
         } catch (ErrorException $th) {
             return response()->json($th->getMessage(), 200);
-        } catch (QueryException $th) {
+        } catch (ErrorException $th) {
             return response()->json($th->getMessage(), 200);
         }
     }

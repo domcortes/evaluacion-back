@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use ErrorException;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -24,14 +26,20 @@ class UsersController extends Controller
      */
     public function create(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = $request->role;
-        $user->save();
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role = $request->role;
+            $user->save();
 
-        return response()->json($user);
+            return response()->json($user);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        } catch (QueryException $th) {
+            return response()->json($th->getMessage(), 200);
+        }
     }
 
     /**
@@ -47,8 +55,16 @@ class UsersController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::where('id', $id)->first();
-        return response()->json($user, 200);
+
+
+        try {
+            $user = User::where('id', $id)->first();
+            return response()->json($user, 200);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        } catch (QueryException $th) {
+            return response()->json($th->getMessage(), 200);
+        }
     }
 
     /**
@@ -72,8 +88,14 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::where('id', $id)->first();
-        $user->delete();
-        return response()->json([], 204);
+        try {
+            $user = User::where('id', $id)->first();
+            $user->delete();
+            return response()->json([], 204);
+        } catch (ErrorException $th) {
+            return response()->json($th->getMessage(), 200);
+        } catch (QueryException $th) {
+            return response()->json($th->getMessage(), 200);
+        }
     }
 }

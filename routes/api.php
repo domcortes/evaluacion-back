@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -29,14 +30,14 @@ Route::post('/user', [AuthController::class, 'user']);
 
 Route::prefix('users')->group(function () {
     Route::get('/', [UsersController::class, 'index']);
-    Route::get('/{id}',[UsersController::class, 'show']);
+    Route::get('/{id}', [UsersController::class, 'show']);
     Route::post('/', [UsersController::class, 'create']);
     Route::delete('/{id}', [UsersController::class, 'destroy']);
 });
 
 Route::prefix('posts')->group(function () {
     Route::get('/', [PostController::class, 'index']);
-    Route::get('/{id}',[PostController::class, 'show']);
+    Route::get('/{id}', [PostController::class, 'show']);
     Route::post('/', [PostController::class, 'create']);
     Route::delete('/{id}', [PostController::class, 'destroy']);
     Route::put('/{id}', [PostController::class, 'update']);
@@ -48,4 +49,12 @@ Route::prefix('categories')->group(function () {
     Route::post('/', [CategoriasController::class, 'create']);
     Route::delete('/{id}', [CategoriasController::class, 'destroy']);
     Route::put('/{id}', [CategoriasController::class, 'update']);
+});
+
+Route::prefix('comments')->group(function () {
+    Route::get('/', [CommentsController::class, 'index']);
+    Route::get('/{id}', [CommentsController::class, 'show']);
+    Route::post('/', [CommentsController::class, 'create']);
+    Route::delete('/{id}', [CommentsController::class, 'destroy']);
+    Route::put('/{id}', [CommentsController::class, 'update']);
 });
