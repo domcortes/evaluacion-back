@@ -32,8 +32,12 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();
-        return response()->json(['message' => 'Sesion cerrada correctamente'], 200);
+        if ($request->user()) {
+            $request->user()->token()->revoke();
+            return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
+        } else {
+            return response()->json(['message' => 'No hay usuario autenticado'], 401);
+        }
     }
 
     public function user(Request $request)
