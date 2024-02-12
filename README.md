@@ -1,66 +1,41 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### Información del Proyecto
+Nombre: Evaluacion Front
+Tipo: Proyecto
+Descripción: Aplicacion destinada como backend de evaluacion-front. <strong>Se sugiere instalar MAMP para mejor experiencia</strong>.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Palabras Clave: Laravel, framework
+Licencia: MIT
 
-## About Laravel
+## Dependencias
+Producción
+    php: PHP versión 8.1.
+    firebase/php-jwt: Biblioteca para trabajar con JSON Web Tokens (JWT) en PHP.
+    guzzlehttp/guzzle: Cliente HTTP para PHP.
+    jeroennoten/laravel-adminlte: Plantilla de administración basada en AdminLTE para Laravel.
+    laravel/framework: Framework Laravel versión 10.10.
+    laravel/sanctum: Paquete para la autenticación API en Laravel.
+    laravel/tinker: Consola REPL para Laravel.
+    laravel/ui: Herramientas de interfaz de usuario prediseñadas para Laravel.
+## Desarrollo
+    fakerphp/faker: Generador de datos falsos para pruebas.
+    laravel/pint: Herramienta para mejorar el rendimiento de Laravel.
+    laravel/sail: Conjunto de Docker para Laravel.
+    mockery/mockery: Biblioteca de mocking para pruebas en PHP.
+    nunomaduro/collision: Manejador de errores y excepciones para consola en Laravel.
+    phpunit/phpunit: Marco de pruebas para PHP.
+    spatie/laravel-ignition: Herramienta de depuración para Laravel.
+    Configuración y Scripts
+    autoload: Configuración de la carga automática de clases.
+    autoload-dev: Configuración de la carga automática de clases para entornos de desarrollo.
+    scripts: Scripts personalizados para varias tareas como la publicación de activos, la generación de claves, etc.
+    extra: Configuración adicional para Laravel.
+    config: Configuración general, como la optimización del autoloader y preferencias de instalación.
+    minimum-stability: Estabilidad mínima del proyecto (estable).
+    prefer-stable: Preferir versiones estables de las dependencias.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este archivo es parte de la configuración del proyecto Laravel y contiene información sobre las dependencias, scripts personalizados y configuraciones adicionales utilizadas en el desarrollo y despliegue del proyecto.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
