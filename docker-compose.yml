@@ -1,0 +1,22 @@
+laravel-app:
+    image: php:latest
+    working_dir: /var/www/html
+    volumes:
+      - ./evaluacion-back:/var/www/html
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    command: >
+      bash -c "
+      composer install --no-interaction --prefer-dist &&
+      php artisan migrate --force &&
+      php artisan db:seed --force &&
+      php artisan serve --host=127.0.0.1"
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=evaluacion
+      - DB_USERNAME=root
+      - DB_PASSWORD=
